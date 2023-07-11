@@ -6,7 +6,11 @@
       "width": 1029,
       "height": 535,
       "type": "match",
-      "match": 95
+      "match": 95,
+      "click_point": {
+        "xpos": 8608,
+        "ypos": 29600
+      }
     }
   ],
   "properties": [],
