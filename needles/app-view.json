@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 143,
+      "ypos": 123,
+      "width": 1029,
+      "height": 535,
+      "type": "match",
+      "match": 95
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "app-view"
+  ]
+}
