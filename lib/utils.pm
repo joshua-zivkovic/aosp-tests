@@ -8,7 +8,7 @@ use Exporter;
 
 use testapi;
 our @EXPORT = qw/check_desktop_clean console_root_exit console_root_login
-    console_user_exit console_user_login send_key_combo type_very_safely
+    console_user_exit console_user_login send_key_combo type_very_safely assert_and_click
     get_password/;
 
 # Get the standard password used everywhere.
@@ -133,7 +133,7 @@ sub assert_and_click {
     if (get_var('BACKEND', 'qad')) {
         my $mustmatch = shift;
         my %args = @_;
-        $last_matched_needle = assert_screen($mustmatch, $args{timeout});
+        my $last_matched_needle = assert_screen($mustmatch, $args{timeout});
         my $relevant_area;
         my $relative_click_point;
         for my $area (reverse @{$last_matched_needle->{area}}) {
