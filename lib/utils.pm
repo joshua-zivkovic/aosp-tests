@@ -128,3 +128,33 @@ sub console_user_login {
 sub console_user_exit {
     script_run('exit', 0);
 }
+
+sub assert_and_click {
+    if (get_var('BACKEND', 'qad')) {
+        my $mustmatch = shift;
+        my %args = @_;
+        $last_matched_needle = assert_screen($mustmatch, $args{timeout});
+        my $relevant_area;
+        my $relative_click_point;
+        for my $area (reverse @{$last_matched_needle->{area}}) {
+            next unless ($relative_click_point = $area->{click_point});
+            $relevant_area = $area;
+            last;
+        }
+        # Calculate the absolute click point.
+        my ($x, $y) = testapi::_calculate_clickpoint($last_matched_needle, $relevant_area, $relative_click_point);
+        bmwqemu::diag("qad clicking at $x/$y");
+        touch(int($x), int($y), 0);
+    } else {
+        testapi::assert_and_click(@_);
+    }
+}
+
+sub touch {
+    my ($self) = @_;
+    my $x = shift;
+    my $y = shift;
+    my $duration = shift;
+    my $console = select_console 'sut';
+    $console->touch(int($x), int($y), $duration);
+}
